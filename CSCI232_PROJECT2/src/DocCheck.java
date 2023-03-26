@@ -24,15 +24,17 @@ public class DocCheck {
         try {
             //create scanner
             Scanner scanner = new Scanner(processingFile);
-            scanner.useDelimiter("[.]");
+            scanner.useDelimiter("[\\s.,-]+");
             File outputFile = new File("spellChecked.txt");
             FileWriter writer = new FileWriter(outputFile);
 
             while (scanner.hasNext()) {
-                String word = scanner.next().toLowerCase();
+                String inputWord = scanner.next();
+                String tempInputWord = inputWord.toLowerCase();
+
 
                 // Strip non-alphanumeric characters from word except letters and apostrophes
-                word = word.replaceAll("[^a-zA-Z']+", " ");
+//                word = word.replaceAll("[^a-zA-Z']+", "");
 
                 if (dictionary.contains(word)) {
                     // Write word to output file if it's in dictionary
@@ -42,7 +44,7 @@ public class DocCheck {
                     writer.write("<" + word + ">");
                 }
                 // Write whitespace character after word
-                String whitespace = scanner.findWithinHorizon("\\s+", 1);
+                String whitespace = scanner.findWithinHorizon("[\\s.,-]+", 2);
                 if (whitespace != null) {
                     writer.write(whitespace);
                 }
