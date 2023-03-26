@@ -41,55 +41,88 @@ public class Main {
         long startTime = System.nanoTime();
         Integer result1 = higher(hashSet, 50000);
         long endTime = System.nanoTime();
-        long duration1 = endTime - startTime;
+        long durationHashHigher = endTime - startTime;
 
 // time the higher() method for the TreeSet
         startTime = System.nanoTime();
         Integer result2 = treeSet.higher(50000);
         endTime = System.nanoTime();
-        long duration2 = endTime - startTime;
+        long durationTreeHigher = endTime - startTime;
 
 // time the higher() method for the HashSet
-        long startTime = System.nanoTime();
-        Integer hashSetHigher = higher(hashSet, 50000);
-        long endTime = System.nanoTime();
-        long duration1 = endTime - startTime;
+        startTime = System.nanoTime();
+        Integer hashCeiling = ceiling(hashSet, 50000);
+        endTime = System.nanoTime();
+        long durationHashCeiling = endTime - startTime;
 
 // time the higher() method for the TreeSet
         startTime = System.nanoTime();
-        Integer result2 = treeSet.higher(50000);
+        Integer treeCeiling = treeSet.higher(50000);
         endTime = System.nanoTime();
-        long duration2 = endTime - startTime;
+        long durationTreeCeiling = endTime - startTime;
 
 
 // print the results
-        System.out.println("HashSet higher() duration: " + duration1 + " ns");
-        System.out.println("TreeSet higher() duration: " + duration2 + " ns");
-        System.out.println("HashSet higher() result: " + result1);
-        System.out.println("TreeSet higher() result: " + result2);
+        System.out.println("HashSet higher() duration: " + durationHashHigher + " ns");
+        System.out.println("TreeSet higher() duration: " + durationTreeHigher + " ns");
+        System.out.println("HashSet ceiling() result: " + durationHashCeiling);
+        System.out.println("TreeSet ceiling() result: " + durationTreeCeiling);
 
     }
-    public static Integer higher(HashSet<Integer> hashSet, int value) {
+    private static Integer higher(HashSet<Integer> hashSet, int value) {
+        // Convert the HashSet to an array of Integers
         Integer[] array = hashSet.toArray(new Integer[0]);
+
+        // Sort the array in ascending order
         Arrays.sort(array);
+
+        // Find the index of the specified value in the array
         int index = Arrays.binarySearch(array, value);
+
+        // If the index is less than the last element in the array, return the next element
         if (index < array.length - 1) {
             return array[index + 1];
         }
+
+        // If there is no next element, return null
         return null;
     }
+
     private static Integer ceiling(HashSet<Integer> hashSet, int value) {
+        // Convert the HashSet to an array of Integers
         Integer[] array = hashSet.toArray(new Integer[0]);
+
+        // Sort the array in ascending order
         Arrays.sort(array);
+
+        // Find the index of the specified value in the array
         int index = Arrays.binarySearch(array, value);
+
+        // If the index is non-negative, return the element at that index
         if (index >= 0) {
             return array[index];
-        } else if (-(index + 1) < array.length) {
+        }
+
+        //index
+        else if (-(index + 1) < array.length) {
             return array[-(index + 1)];
         }
+
+        // If there is no element greater than or equal to the specified value, return null
         return null;
     }
+
 }
 
+/*
+TreeSet is a self balancing BST, meaning finding ordered elements is done in logn time.
+Hash tables are much less efficient at finding ordered elements, meaning they can
+be found in only nlogn time. This is because hash table are only nebulous collections of
+data, and are essentially an unordered array.
 
+Tree sets are useful when elements must be stored in an ordered fashion, as sorted elements
+are much quicker to find. However, hashsets can access any specific element in constant time, meaning
+insertion, deletion, and lookup operations can be done much faster than tree sets.
+
+ */
 
