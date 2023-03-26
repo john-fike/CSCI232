@@ -24,18 +24,22 @@ public class DocCheck {
         try {
             //create scanner
             Scanner scanner = new Scanner(processingFile);
-            File outputFile = new File("C:\\Users\\John Fike\\CSCI232\\CSCI232\\CSCI232_PROJECT2\\out\\production\\CSCI232_PROJECT2\\spellChecked.txt");
+            scanner.useDelimiter("[.]");
+            File outputFile = new File("spellChecked.txt");
             FileWriter writer = new FileWriter(outputFile);
 
             while (scanner.hasNext()) {
                 String word = scanner.next().toLowerCase();
 
-                // Strip non-alphanumeric characters from word except letters
-                word = word.replaceAll("(?<!\\w&&[^'])(?i)[\\w']+(?<!['])", "");
+                // Strip non-alphanumeric characters from word except letters and apostrophes
+                word = word.replaceAll("[^a-zA-Z']+", " ");
 
                 if (dictionary.contains(word)) {
                     // Write word to output file if it's in dictionary
                     writer.write(word);
+                } else {
+                    // Enclose misspelled word in triangle brackets and write to output file
+                    writer.write("<" + word + ">");
                 }
                 // Write whitespace character after word
                 String whitespace = scanner.findWithinHorizon("\\s+", 1);
@@ -50,6 +54,7 @@ public class DocCheck {
             System.out.println("Error processing file.");
         }
     }
+
 
     public static void wordCount(File processingFile) {
         // Create two maps to store word counts and sets of words for each count
