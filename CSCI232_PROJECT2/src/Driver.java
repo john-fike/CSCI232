@@ -5,6 +5,6 @@ public class Driver {
         File dictionaryFile = new File("words.txt");
         File processingFile = new File("test.txt");
         DocCheck.spellCheck(processingFile, dictionaryFile);
-        DocCheck.wordCount(processingFile);
+//        DocCheck.wordCount(processingFile);
     }
 }
