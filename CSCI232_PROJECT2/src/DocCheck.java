@@ -12,7 +12,7 @@ public class DocCheck {
         // Load dictionary into HashSet
         try (Scanner scanner = new Scanner(dictionaryFile)) {
             while (scanner.hasNextLine()) {
-                String word = scanner.nextLine().trim().toLowerCase();
+                String word = scanner.nextLine();
                 dictionary.add(word);
             }
         } catch (FileNotFoundException e) {
@@ -63,7 +63,7 @@ public class DocCheck {
                 // Get the next nextWord and convert it to lowercase
                 String nextWord = scanner.next().toLowerCase();
 
-                // Grab count for the current nextWord in the countPerWord map, increment. Start from 0 if nextWord hasn't been counted before.
+                // Grab count for the current nextWord in the countPerWord map, increment. Start at 1 if nextWord hasn't been counted before.
                 int count = countPerWord.getOrDefault(nextWord, 0) + 1;
                 //Update count in hashmap
                 countPerWord.put(nextWord, count);
