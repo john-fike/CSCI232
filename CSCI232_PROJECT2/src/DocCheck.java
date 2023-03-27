@@ -60,23 +60,26 @@ public class DocCheck {
             scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
             // Iterate over each word in the file
             while (scanner.hasNext()) {
-                // Get the next word and convert it to lowercase
-                String word = scanner.next().toLowerCase();
+                // Get the next nextWord and convert it to lowercase
+                String nextWord = scanner.next().toLowerCase();
 
-                // Increment the count for the current word in the countPerWord map. Start from 0 if word hasn't been counted before.
-                int count = countPerWord.getOrDefault(word, 0) + 1;
-                countPerWord.put(word, count);
+                // Grab count for the current nextWord in the countPerWord map, increment. Start from 0 if nextWord hasn't been counted before.
+                int count = countPerWord.getOrDefault(nextWord, 0) + 1;
+                //Update count in hashmap
+                countPerWord.put(nextWord, count);
 
                 // Get the set of words with the current count from the wordsPerCount map,
                 // or create a new empty set if it doesn't exist yet
                 HashSet<String> words = wordsPerCount.getOrDefault(count, new HashSet<>());
-
-                // Add the current word to the set of words with the current count
-                words.add(word);
-
+                // Add the current nextWord to the set of words with the current count
+                words.add(nextWord);
                 // Update the wordsPerCount map with the new set of words for the current count
                 wordsPerCount.put(count, words);
             }
+//            for(String key : countPerWord.keySet()){
+//
+//            }
+
         } catch (FileNotFoundException e) {
             // If the file isn't found, print an error message and return
             System.out.println("File not found: " + processingFile);
@@ -86,13 +89,6 @@ public class DocCheck {
         // Print the total number of words and the mapping of counts to sets of words
         System.out.println("Word count: " + countPerWord.size());
         System.out.println("Words per count: " + wordsPerCount);
-
-
-        List<Integer> counts = new ArrayList<>(wordsPerCount.keySet());
-        Collections.sort(counts);
-        for (int count : counts) {
-            System.out.println(count + ": " + wordsPerCount.get(count));
-        }
     }
 }
 
