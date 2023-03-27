@@ -76,10 +76,6 @@ public class DocCheck {
                 // Update the wordsPerCount map with the new set of words for the current count
                 wordsPerCount.put(count, words);
             }
-//            for(String key : countPerWord.keySet()){
-//
-//            }
-
         } catch (FileNotFoundException e) {
             // If the file isn't found, print an error message and return
             System.out.println("File not found: " + processingFile);
