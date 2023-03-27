@@ -24,7 +24,8 @@ public class DocCheck {
         try {
             //create scanner
             Scanner scanner = new Scanner(processingFile);
-            scanner.useDelimiter("[\\s.,-]+");
+            //stop at punctuation
+            scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
             File outputFile = new File("spellChecked.txt");
             FileWriter writer = new FileWriter(outputFile);
 
@@ -32,28 +33,20 @@ public class DocCheck {
                 String inputWord = scanner.next();
                 String tempInputWord = inputWord.toLowerCase();
 
-
-                // Strip non-alphanumeric characters from word except letters and apostrophes
-//                word = word.replaceAll("[^a-zA-Z']+", "");
-
-                if (dictionary.contains(word)) {
+                if (dictionary.contains(tempInputWord)) {
                     // Write word to output file if it's in dictionary
-                    writer.write(word);
-                } else {
-                    // Enclose misspelled word in triangle brackets and write to output file
-                    writer.write("<" + word + ">");
+                    writer.write(inputWord);
                 }
-                // Write whitespace character after word
-                String whitespace = scanner.findWithinHorizon("[\\s.,-]+", 2);
-                if (whitespace != null) {
-                    writer.write(whitespace);
+                // Write whitespace and punctuation that follow the word
+                String remainingChars = scanner.findWithinHorizon("[\\s.,-]+", 2);
+                if (remainingChars != null) {
+                    writer.write(remainingChars);
                 }
             }
-
             scanner.close();
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error processing file.");
+            System.out.println("Please try again later. Taking a nap rn zzz");
         }
     }
 
@@ -64,21 +57,13 @@ public class DocCheck {
         HashMap<Integer, HashSet<String>> wordsPerCount = new HashMap<>();
 
         try (Scanner scanner = new Scanner(processingFile)) {
+            scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
             // Iterate over each word in the file
             while (scanner.hasNext()) {
                 // Get the next word and convert it to lowercase
                 String word = scanner.next().toLowerCase();
 
-                // Remove any non-letter characters from the word using a regex
-                word = word.replaceAll("[^a-zA-Z]", "");
-
-                // If the word is empty (i.e. only contained non-letter characters),
-                // skip to the next word
-                if (word.isEmpty()) {
-                    continue;
-                }
-
-                // Increment the count for the current word in the countPerWord map
+                // Increment the count for the current word in the countPerWord map. Start from 0 if word hasn't been counted before.
                 int count = countPerWord.getOrDefault(word, 0) + 1;
                 countPerWord.put(word, count);
 
