@@ -23,8 +23,8 @@ public class Main {
         Integer arr[] = {10,5,8,1,11,3};
         Set<Integer> set = new HashSet<>(Arrays.asList(arr));
         System.out.println(set);
-        System.out.println(higher((HashSet<Integer>) set,10));  //why do I have to cast this? I do not know
-        System.out.println(ceiling((HashSet<Integer>) set,10));  //why do I have to cast this? I do not know
+        System.out.println(higher((HashSet<Integer>) set,10));
+        System.out.println(ceiling((HashSet<Integer>) set,10));
 
 
         // create a HashSet and a TreeSet with the same elements
@@ -37,27 +37,29 @@ public class Main {
             treeSet.add(value);
         }
 
+        int randValue = random.nextInt(100000);
+
 // time the higher() method for the HashSet
         long startTime = System.nanoTime();
-        Integer result1 = higher(hashSet, 50000);
+        Integer result1 = higher(hashSet, randValue);
         long endTime = System.nanoTime();
         long durationHashHigher = endTime - startTime;
 
 // time the higher() method for the TreeSet
         startTime = System.nanoTime();
-        Integer result2 = treeSet.higher(50000);
+        Integer result2 = treeSet.higher(randValue);
         endTime = System.nanoTime();
         long durationTreeHigher = endTime - startTime;
 
-// time the higher() method for the HashSet
+// time the ceiling() method for the HashSet
         startTime = System.nanoTime();
-        Integer hashCeiling = ceiling(hashSet, 50000);
+        Integer hashCeiling = ceiling(hashSet, randValue);
         endTime = System.nanoTime();
         long durationHashCeiling = endTime - startTime;
 
-// time the higher() method for the TreeSet
+// time the ceiling() method for the TreeSet
         startTime = System.nanoTime();
-        Integer treeCeiling = treeSet.higher(50000);
+        Integer treeCeiling = treeSet.higher(randValue);
         endTime = System.nanoTime();
         long durationTreeCeiling = endTime - startTime;
 
@@ -65,10 +67,12 @@ public class Main {
 // print the results
         System.out.println("HashSet higher() duration: " + durationHashHigher + " ns");
         System.out.println("TreeSet higher() duration: " + durationTreeHigher + " ns");
-        System.out.println("HashSet ceiling() result: " + durationHashCeiling);
-        System.out.println("TreeSet ceiling() result: " + durationTreeCeiling);
+        System.out.println("HashSet ceiling() result: " + durationHashCeiling + "ns");
+        System.out.println("TreeSet ceiling() result: " + durationTreeCeiling + "ns");
 
     }
+
+    //find
     private static Integer higher(HashSet<Integer> hashSet, int value) {
         // Convert the HashSet to an array of Integers
         Integer[] array = hashSet.toArray(new Integer[0]);
@@ -88,6 +92,7 @@ public class Main {
         return null;
     }
 
+    //find element greater than or equal to element of value value
     private static Integer ceiling(HashSet<Integer> hashSet, int value) {
         // Convert the HashSet to an array of Integers
         Integer[] array = hashSet.toArray(new Integer[0]);
@@ -103,7 +108,8 @@ public class Main {
             return array[index];
         }
 
-        //index
+        //if binary search has returned an index within the array, return the element larger than
+        //element at insertion point
         else if (-(index + 1) < array.length) {
             return array[-(index + 1)];
         }
