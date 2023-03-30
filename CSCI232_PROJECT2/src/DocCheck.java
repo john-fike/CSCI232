@@ -25,7 +25,7 @@ public class DocCheck {
             //create scanner
             Scanner scanner = new Scanner(processingFile);
             //stop at punctuation
-            scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
+            scanner.useDelimiter("[\\s.,\\-:()@&*]+|\\r?\\n");
             File outputFile = new File("spellChecked.txt");
             FileWriter writer = new FileWriter(outputFile);
 
@@ -38,7 +38,7 @@ public class DocCheck {
                     writer.write(inputWord);
                 }
                 // Write whitespace and punctuation that follow the word
-                String remainingChars = scanner.findWithinHorizon("[\\s.,-]+", 2);
+                String remainingChars = scanner.findWithinHorizon("[\\s.,\\-&@]+", 2);
                 if (remainingChars != null) {
                     writer.write(remainingChars);
                 }
