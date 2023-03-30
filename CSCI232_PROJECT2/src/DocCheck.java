@@ -26,7 +26,7 @@ public class DocCheck {
             Scanner scanner = new Scanner(processingFile);
             //stop at punctuation
             scanner.useDelimiter("[\\s.,\\-:()@&*]+|\\r?\\n");
-            File outputFile = new File("spellChecked.txt");
+            File outputFile = new File(processingFile.getName() + "_spellchecked");
             FileWriter writer = new FileWriter(outputFile);
 
             while (scanner.hasNext()) {
@@ -36,6 +36,8 @@ public class DocCheck {
                 if (dictionary.contains(tempInputWord)) {
                     // Write word to output file if it's in dictionary
                     writer.write(inputWord);
+                }else{
+                    writer.write("<" + inputWord + ">");
                 }
                 // Write whitespace and punctuation that follow the word
                 String remainingChars = scanner.findWithinHorizon("[\\s.,\\-&@]+", 2);
@@ -56,7 +58,12 @@ public class DocCheck {
         HashMap<String, Integer> countPerWord = new HashMap<>();
         HashMap<Integer, HashSet<String>> wordsPerCount = new HashMap<>();
 
+
+
         try (Scanner scanner = new Scanner(processingFile)) {
+            File outputFile = new File(processingFile.getName() + "_spellchecked");
+            FileWriter writer = new FileWriter(outputFile);
+
             scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
             // Iterate over each word in the file
             while (scanner.hasNext()) {
@@ -76,15 +83,19 @@ public class DocCheck {
                 // Update the wordsPerCount map with the new set of words for the current count
                 wordsPerCount.put(count, words);
             }
+            // Print the total number of words and the mapping of counts to sets of words
+            writer.write("Word count: " + countPerWord.size());
+            writer.write("Words per count: " + wordsPerCount);
         } catch (FileNotFoundException e) {
             // If the file isn't found, print an error message and return
             System.out.println("File not found: " + processingFile);
             return;
+        } catch (IOException e) {
+            System.out.println("Cannot create writer");
         }
 
-        // Print the total number of words and the mapping of counts to sets of words
-        System.out.println("Word count: " + countPerWord.size());
-        System.out.println("Words per count: " + wordsPerCount);
+
+
     }
 }
 
