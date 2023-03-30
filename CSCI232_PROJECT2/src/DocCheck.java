@@ -59,7 +59,6 @@ public class DocCheck {
         HashMap<Integer, HashSet<String>> wordsPerCount = new HashMap<>();
 
 
-
         try (Scanner scanner = new Scanner(processingFile)) {
             File outputFile = new File(processingFile.getName() + "_spellchecked");
             FileWriter writer = new FileWriter(outputFile);
@@ -93,9 +92,6 @@ public class DocCheck {
         } catch (IOException e) {
             System.out.println("Cannot create writer");
         }
-
-
-
     }
 }
 
