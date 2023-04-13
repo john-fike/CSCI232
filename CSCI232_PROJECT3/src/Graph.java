@@ -42,8 +42,9 @@ public class Graph {
     public int getDegree(int vertex){
         return adjacencyList[vertex].toArray().length;
     }
-    
-    // Return the degree value of the vertex with the largest degree value in the graph.
+    //////////////////////////////////////////////////////////////////
+    ////////////////////////getMaxDegree//////////////////////////////
+    //////////////////////////////////////////////////////////////////
     public int getMaxDegree() {
         int maxDegree=0;
         for(int i=0; i<adjacencyList.length; i++){
@@ -54,7 +55,13 @@ public class Graph {
         return maxDegree;
     }
 
-    // Return wheather or not the graph is a simple graph.
+    //////////////////////////////////////////////////////////////////
+    ///////////////////////////isSimple///////////////////////////////
+    //determine if graph is simple
+    //iterate through adjacencyList and:
+    // 1--determine if the vertex at that point is adjacent to itself
+    // 2--create a hashset and add the edges, returning false if there are any repeated edges
+    //////////////////////////////////////////////////////////////////
     public boolean isSimple() {
         for(int i=0; i<adjacencyList.length; i++){
             if(!adjacencyList[i].contains(i)){
