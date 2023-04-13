@@ -2,21 +2,43 @@
 import java.util.LinkedList;
 
 /**
- *
- * @author yaw
+ *graph class
  */
 public class Graph {
 
     private LinkedList<Integer>[] adjacencyList;
-    private int numEdges;
+    private int numEdges,numVerticies;
     
     public Graph(int numVertices) {
         adjacencyList = new LinkedList[numVertices];
-
+        this.numVerticies = numVertices;
         for (int i = 0; i < adjacencyList.length; i++) {
             adjacencyList[i] = new LinkedList<>();
         }
     }
+
+    public void printConnectedComponents(){
+        System.out.print("{");
+        DepthFirstSearch dfs = new DepthFirstSearch(this, 0);
+        System.out.println("}");
+        boolean[] visited = dfs.visited;
+        for(int i=0; i< visited.length; i++){
+            if(!visited[i]){
+                System.out.print("{");
+                dfs = new DepthFirstSearch(this, i,visited);
+                System.out.println("}");
+                visited = dfs.visited;
+            }
+        }
+
+
+        pCC(visited);
+    }
+
+    public void pCC(boolean[] visited){
+
+    }
+
 
     public int getNumVertices() {
         return adjacencyList.length;
@@ -47,17 +69,17 @@ public class Graph {
     }
     
     public static Graph defaultGraph() {
-        Graph graph = new Graph(6);
+        Graph graph = new Graph(9);
         
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
+        graph.addEdge(0, 3);
         graph.addEdge(2, 4);
+        graph.addEdge(1, 3);
         graph.addEdge(3, 4);
-        graph.addEdge(3, 5);
-        graph.addEdge(4, 5);
-        
+        graph.addEdge(5, 6);
+        graph.addEdge(6, 8);
+
         return graph;
     }
 }
