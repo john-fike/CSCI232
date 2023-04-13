@@ -19,8 +19,11 @@ public class Driver {
         g.addEdge(3, 5);
 
 
+
         System.out.println(g.getDegree(4));
         System.out.println(g.getMaxDegree());
         System.out.println(g.isSimple());
+
+
     }
 }

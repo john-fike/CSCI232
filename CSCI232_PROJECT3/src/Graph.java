@@ -63,7 +63,7 @@ public class Graph {
     //determine if graph is simple
     //iterate through adjacencyList and:
     // 1--determine if the vertex at that point is adjacent to itself
-    // 2--create a hashset and add the edges, returning false if there are any repeated edges
+    // 2--create a hashset and add neighbors, returning false if there are any repeated edges
     //////////////////////////////////////////////////////////////////
     public boolean isSimple() {
         try {
@@ -71,7 +71,7 @@ public class Graph {
                 if(!adjacencyList[i].contains(i)){
                     HashSet<Integer> set = new HashSet<>();
                     for (int j = 0; j < adjacencyList[i].size(); j++) {
-                        int current = adjacencyList[j].get(j);
+                        int current = adjacencyList[i].get(j);
                         if (set.contains(current)) {
                             return false;
                         } else {
