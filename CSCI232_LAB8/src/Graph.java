@@ -30,13 +30,6 @@ public class Graph {
                 visited = dfs.visited;
             }
         }
-
-
-        pCC(visited);
-    }
-
-    public void pCC(boolean[] visited){
-
     }
 
 
