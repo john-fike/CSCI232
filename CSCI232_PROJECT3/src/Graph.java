@@ -56,23 +56,21 @@ public class Graph {
 
     // Return wheather or not the graph is a simple graph.
     public boolean isSimple() {
-        HashSet<String> edgeSet = new HashSet<>();
-
-        for (int i = 0; i < adjacencyList.length; i++) {
-            LinkedList<Integer> neighbors = getNeighbors(i);
-            for (Integer neighbor : neighbors) {
-                String edge1 = i + "," + neighbor;
-                String edge2 = neighbor + "," + i;
-                if (!edgeSet.contains(edge1) && !edgeSet.contains(edge2)) {
-                    edgeSet.add(edge1);
-                } else {
-                    return false;
+        for(int i=0; i<adjacencyList.length; i++){
+            if(!adjacencyList[i].contains(i)){
+                HashSet<Integer> set = new HashSet<>();
+                for (int j = 0; j < adjacencyList[i].size(); j++) {
+                    int current = adjacencyList[j].get(j);
+                    if (set.contains(current)) {
+                        return false;
+                    } else {
+                        set.add(current);
+                    }
                 }
+            }else{
+                return false;
             }
         }
         return true;
     }
-
-
-
 }
