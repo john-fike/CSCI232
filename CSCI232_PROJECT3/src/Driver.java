@@ -18,10 +18,8 @@ public class Driver {
         g.addEdge(3, 4);
         g.addEdge(3, 5);
         g.addEdge(3, 3);
-        g.addEdge(3, 3);
         g.addEdge(4, 7);
 
-//        g.addEdge(4, 5);
 
         System.out.println(g.getDegree(4));
         System.out.println(g.getMaxDegree());
