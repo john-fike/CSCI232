@@ -1,9 +1,6 @@
 
 import java.util.LinkedList;
 
-/**
- *graph class
- */
 public class Graph {
 
     private LinkedList<Integer>[] adjacencyList;
@@ -16,18 +13,23 @@ public class Graph {
             adjacencyList[i] = new LinkedList<>();
         }
     }
-
+    //////////////////////////////////////////////////////////////////
+    ///////////////////printConnectedComponents///////////////////////
+    //call an initial depth search on first vertex
+    //grab the visited verticies
+    //keep depth searching & updating visited array until all verticies visited
+    //////////////////////////////////////////////////////////////////
     public void printConnectedComponents(){
         System.out.print("{");
         DepthFirstSearch dfs = new DepthFirstSearch(this, 0);
         System.out.println("}");
-        boolean[] visited = dfs.visited;
+        boolean[] visited = dfs.getVisited();
         for(int i=0; i< visited.length; i++){
             if(!visited[i]){
                 System.out.print("{");
                 dfs = new DepthFirstSearch(this, i,visited);
                 System.out.println("}");
-                visited = dfs.visited;
+                visited = dfs.getVisited();
             }
         }
     }
@@ -62,8 +64,9 @@ public class Graph {
     }
     
     public static Graph defaultGraph() {
-        Graph graph = new Graph(9);
-        
+        Graph graph = new Graph(20);
+
+        //example graph
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(0, 3);
@@ -72,6 +75,17 @@ public class Graph {
         graph.addEdge(3, 4);
         graph.addEdge(5, 6);
         graph.addEdge(6, 8);
+
+        //more test verticies
+        graph.addEdge(12, 4);
+        graph.addEdge(3,17);
+        graph.addEdge(19,4);
+        graph.addEdge(14,15);
+        graph.addEdge(18,14);
+        graph.addEdge(16,9);
+        graph.addEdge(6,9);
+        graph.addEdge(6,9);
+        graph.addEdge(6,9);
 
         return graph;
     }
