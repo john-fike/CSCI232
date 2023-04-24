@@ -60,7 +60,7 @@ public class DocCheck {
 
 
         try (Scanner scanner = new Scanner(processingFile)) {
-            File outputFile = new File(processingFile.getName() + "_spellchecked");
+            File outputFile = new File(processingFile.getName() + "_wordCount.txt");
             FileWriter writer = new FileWriter(outputFile);
 
             scanner.useDelimiter("[\\s.,\\-:()@]+|\\r?\\n");
@@ -84,7 +84,7 @@ public class DocCheck {
             }
             // Print the total number of words and the mapping of counts to sets of words
             writer.write("Word count: " + countPerWord.size());
-            writer.write("Words per count: " + wordsPerCount);
+            System.out.println("Words per count: " + wordsPerCount);
         } catch (FileNotFoundException e) {
             // If the file isn't found, print an error message and return
             System.out.println("File not found: " + processingFile);

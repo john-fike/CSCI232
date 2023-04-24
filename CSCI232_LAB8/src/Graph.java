@@ -64,7 +64,7 @@ public class Graph {
     }
     
     public static Graph defaultGraph() {
-        Graph graph = new Graph(20);
+        Graph graph = new Graph(9);
 
         //example graph
         graph.addEdge(0, 1);
@@ -77,15 +77,15 @@ public class Graph {
         graph.addEdge(6, 8);
 
         //more test verticies
-        graph.addEdge(12, 4);
-        graph.addEdge(3,17);
-        graph.addEdge(19,4);
-        graph.addEdge(14,15);
-        graph.addEdge(18,14);
-        graph.addEdge(16,9);
-        graph.addEdge(6,9);
-        graph.addEdge(6,9);
-        graph.addEdge(6,9);
+//        graph.addEdge(12, 4);
+//        graph.addEdge(3,17);
+//        graph.addEdge(19,4);
+//        graph.addEdge(14,15);
+//        graph.addEdge(18,14);
+//        graph.addEdge(16,9);
+//        graph.addEdge(6,9);
+//        graph.addEdge(6,9);
+//        graph.addEdge(6,9);
 
         return graph;
     }
