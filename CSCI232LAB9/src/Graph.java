@@ -1,10 +1,8 @@
-
 import java.util.LinkedList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
-/**
- *
- * @author yaw
- */
 public class Graph {
 
     private LinkedList<Integer>[] adjacencyList;
@@ -23,7 +21,35 @@ public class Graph {
     }
 
     private void loadGraph(String file) {
-        // TODO: Code to load graph from file.
+        Integer numVerticies = 0;
+        try{
+            Scanner scanner = new Scanner(new File(file));
+            numVerticies =  scanner.nextInt();
+            if(numVerticies>0){
+                adjacencyList = new LinkedList[numVerticies];
+
+                for (int i = 0; i < adjacencyList.length; i++) {
+                    adjacencyList[i] = new LinkedList<>();
+                }
+                String line = scanner.nextLine();
+                while (scanner.hasNextLine()) {
+                    line = scanner.nextLine();
+                    String[] verticies = line.split(",");
+                    addEdge(Integer.parseInt(verticies[0]),Integer.parseInt(verticies[1]));
+                }
+                System.out.println("Graph of size: " + numVerticies + " created");
+
+            }else{
+                System.out.println("Bad File Format");
+            }
+
+
+            scanner.close();
+        }catch (FileNotFoundException f){
+            System.out.println("File not found: " + file);
+        }
+
+
     }
 
     public int getNumVertices() {

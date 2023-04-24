@@ -1,12 +1,5 @@
-
 import java.util.LinkedList;
 import java.util.Queue;
-
-
-/**
- *
- * @author yaw
- */
 public class BreadthFirstSearch {
     private boolean[] visited;
     
