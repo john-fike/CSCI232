@@ -24,13 +24,19 @@ public class Graph {
         Integer numVerticies = 0;
         try{
             Scanner scanner = new Scanner(new File(file));
+
+            //first int in file is number of verticies
             numVerticies =  scanner.nextInt();
             if(numVerticies>0){
+
+                //create graph using yaw code
                 adjacencyList = new LinkedList[numVerticies];
 
                 for (int i = 0; i < adjacencyList.length; i++) {
                     adjacencyList[i] = new LinkedList<>();
                 }
+
+                //go thru rest of file, add edges from line of CSVs
                 String line = scanner.nextLine();
                 while (scanner.hasNextLine()) {
                     line = scanner.nextLine();
@@ -42,14 +48,10 @@ public class Graph {
             }else{
                 System.out.println("Bad File Format");
             }
-
-
             scanner.close();
         }catch (FileNotFoundException f){
             System.out.println("File not found: " + file);
         }
-
-
     }
 
     public int getNumVertices() {
