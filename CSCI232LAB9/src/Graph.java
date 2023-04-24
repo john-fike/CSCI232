@@ -37,7 +37,7 @@ public class Graph {
                     String[] verticies = line.split(",");
                     addEdge(Integer.parseInt(verticies[0]),Integer.parseInt(verticies[1]));
                 }
-                System.out.println("Graph of size: " + numVerticies + " created");
+                System.out.println("Graph of size " + numVerticies + " created");
 
             }else{
                 System.out.println("Bad File Format");
