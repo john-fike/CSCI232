@@ -95,18 +95,27 @@ public class Graph {
     public void addEdge(int vertex1, int vertex2, int weight) {
         adjacencyList[vertex1].add(vertex2);
         adjacencyList[vertex2].add(vertex1);
-
-        int tempVert1 = vertex1;
-        int tempVert2 = 1000 * tempVert1;
-        for(int i=0;i<weight;i++){
-            weightedAdjacencyList[tempVert1].add(tempVert2);
-            weightedAdjacencyList[tempVert2].add(tempVert1);
-            tempVert1 = tempVert2;
-            tempVert2++;
+                                                                //if edge being created has weight, create synthetic nodes representing weight
+        if(weight>1){
+            int tempVert1 = vertex1;
+            int tempVert2 = 1000 * tempVert1;
+                                                                //for every unit of weight, add another node way out yonder
+            for(int i=0;i<weight-1;i++){
+                weightedAdjacencyList[tempVert1].add(tempVert2);
+                weightedAdjacencyList[tempVert2].add(tempVert1);
+                tempVert1 = tempVert2;
+                tempVert2++;
+            }
+                                                                //connect yonder nodes to "real" node
+            tempVert2--;
+            weightedAdjacencyList[tempVert2].add(vertex2);
+            weightedAdjacencyList[vertex2].add(tempVert2);
+        }else{
+            //else if not weighted just connect regularly
+            weightedAdjacencyList[vertex1].add(vertex2);
+            weightedAdjacencyList[vertex2].add(vertex1);
         }
-        tempVert2--;
-        weightedAdjacencyList[tempVert2].add(vertex2);
-        weightedAdjacencyList[vertex2].add(tempVert2);
+
         numEdges++;
     }
     public void addEdge(int vertex1, int vertex2) {

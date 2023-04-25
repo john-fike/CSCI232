@@ -2,19 +2,19 @@ import java.util.LinkedList;
 
 public class IntegerShortestPath {
     public static void main(String[] args) {
-//        if (args.length != 3) {
-//            System.out.println("Usage: java MyProgram <file> <a> <b>");
-//            return;
-//        }
+        if (args.length != 3) {
+            System.out.println("Please format input like so: <file> <vertex 1> <vertex 2>");
+            return;
+        }
 
         //parse input from args
-//        String fileName = args[0];
-//        int startingVertex =  Integer.parseInt(args[1]);
-//        int endingVertex = Integer.parseInt(args[2]);
+        String fileName = args[0];
+        int startingVertex =  Integer.parseInt(args[1]);
+        int endingVertex = Integer.parseInt(args[2]);
 
-        String fileName = "C:\\Users\\John Fike\\CSCI232\\CSCI232\\CSCI232LAB9\\src\\graph.txt";
-        int startingVertex =  0;
-        int endingVertex = 3;
+//        String fileName = "C:\\Users\\John Fike\\CSCI232\\CSCI232\\CSCI232LAB9\\src\\graph.txt";
+//        int startingVertex =  0;
+//        int endingVertex = 3;
 
 
         //create new graph from file, search using BFS, grab path from BFS obj
@@ -40,19 +40,11 @@ public class IntegerShortestPath {
                 jumps++;
             }
         }
-        System.out.println(pathStr.toString());
         System.out.println("Total Weight: " + totalWeight);
         System.out.println("Num jumps: " + jumps);
+        System.out.println(pathStr.toString());
+
     }
 }
 
-//4
-//        0,2,2
-//        0,1,2
-//        1,3,1
-
-//4
-//        0,1,2
-//        0,2,1
-//        2,3,3
-//        0,3,2
+//print no work, if statement somehow not needed 
