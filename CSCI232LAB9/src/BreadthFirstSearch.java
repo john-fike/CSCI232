@@ -5,10 +5,12 @@ public class BreadthFirstSearch {
     
     private int[] previousVertex;
     private int startVertex;
+    private int numUnweightedVerticies;
 
     public BreadthFirstSearch(Graph graph, int startVertex) {
-        visited = new boolean[graph.getNumVertices()];
-        previousVertex = new int[graph.getNumVertices()];
+        visited = new boolean[graph.getNumWeightedVertices()];
+        previousVertex = new int[graph.getNumWeightedVertices()];
+        numUnweightedVerticies = graph.getNumVerticies();
         this.startVertex = startVertex;
         bfs(graph, startVertex);
     }
