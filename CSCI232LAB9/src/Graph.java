@@ -1,4 +1,4 @@
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +8,8 @@ public class Graph {
 
     private LinkedList<Integer>[] adjacencyList;
     private LinkedList<Integer>[] weightedAdjacencyList;
-    HashMap<String, Integer> weightMap = new HashMap<String, Integer>();
+//    HashMap<String, Integer> weightMap = new HashMap<String, Integer>();
     private int numEdges;
-    private int maxVal;
 
 
     public Graph(int numVertices) {
@@ -46,14 +45,19 @@ public class Graph {
                     weightedAdjacencyList[i] = new LinkedList<>();
                 }
 
-                //go thru rest of file, add edges from line of CSVs
+                //go thru rest of file, add edges from line of CSVs, add weights to weightMap
                 String line = scanner.nextLine();
                 while (scanner.hasNextLine()) {
                     line = scanner.nextLine();
                     String[] vals = line.split(",");
                     addEdge(Integer.parseInt(vals[0]),Integer.parseInt(vals[1]),Integer.parseInt(vals[2]));
-                    weightMap.put((vals[0] + "," + vals[1]),Integer.parseInt(vals[2]));
-                    weightMap.put((vals[1] + "," + vals[0]),Integer.parseInt(vals[2]));
+//
+//                    weightMap.put((vals[0] + "," + vals[1]),Integer.parseInt(vals[2]));
+//                    System.out.println("Edge: " + vals[0] + "," + vals[1] + " with weight: " + Integer.parseInt(vals[2]) + " has been mapped");
+//
+//                    weightMap.put((vals[1] + "," + vals[0]),Integer.parseInt(vals[2]));
+//                    System.out.println("Edge: " + vals[1] + "," + vals[0] + " with weight: " + Integer.parseInt(vals[2]) + " has been mapped");
+
                 }
 
                 System.out.println("Graph of size " + numVerticies + " created");
@@ -67,14 +71,15 @@ public class Graph {
         }
     }
 
-    public Integer getWeight(String edge){
-        if(weightMap.containsKey(edge)){
-            return weightMap.get(edge);
-        }else{
-            System.out.println("Edge does not exist");
-            return null;
-        }
-    }
+//    public Integer getWeight(String edge){
+//        if(weightMap.containsKey(edge)){
+//            System.out.println("Edge: " + edge + " has weight: " + weightMap.get(edge));
+//            return weightMap.get(edge);
+//        }else{
+//            System.out.println("Edge: " + edge + " does not exist");
+//            return 0;
+//        }
+//    }
 
     public int getNumWeightedVertices() {
         return weightedAdjacencyList.length;
@@ -85,7 +90,7 @@ public class Graph {
     }
 
     public int getMaxVal(){
-        return maxVal-1;
+        return getNumVerticies()-1;
     }
 
     public int getNumEdges() {
