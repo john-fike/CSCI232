@@ -1,4 +1,3 @@
-//import java.util.HashMap;
 import java.util.LinkedList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +7,6 @@ public class Graph {
 
     private LinkedList<Integer>[] adjacencyList;
     private LinkedList<Integer>[] weightedAdjacencyList;
-//    HashMap<String, Integer> weightMap = new HashMap<String, Integer>();
     private int numEdges;
 
 
@@ -51,13 +49,6 @@ public class Graph {
                     line = scanner.nextLine();
                     String[] vals = line.split(",");
                     addEdge(Integer.parseInt(vals[0]),Integer.parseInt(vals[1]),Integer.parseInt(vals[2]));
-//
-//                    weightMap.put((vals[0] + "," + vals[1]),Integer.parseInt(vals[2]));
-//                    System.out.println("Edge: " + vals[0] + "," + vals[1] + " with weight: " + Integer.parseInt(vals[2]) + " has been mapped");
-//
-//                    weightMap.put((vals[1] + "," + vals[0]),Integer.parseInt(vals[2]));
-//                    System.out.println("Edge: " + vals[1] + "," + vals[0] + " with weight: " + Integer.parseInt(vals[2]) + " has been mapped");
-
                 }
 
                 System.out.println("Graph of size " + numVerticies + " created");
@@ -70,16 +61,6 @@ public class Graph {
             System.out.println("File not found: " + file);
         }
     }
-
-//    public Integer getWeight(String edge){
-//        if(weightMap.containsKey(edge)){
-//            System.out.println("Edge: " + edge + " has weight: " + weightMap.get(edge));
-//            return weightMap.get(edge);
-//        }else{
-//            System.out.println("Edge: " + edge + " does not exist");
-//            return 0;
-//        }
-//    }
 
     public int getNumWeightedVertices() {
         return weightedAdjacencyList.length;

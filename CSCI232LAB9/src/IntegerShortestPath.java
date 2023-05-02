@@ -8,13 +8,13 @@ public class IntegerShortestPath {
 //        }
 
         //parse input from args
-//        String fileName = args[0];
-//        int startingVertex =  Integer.parseInt(args[1]);
-//        int endingVertex = Integer.parseInt(args[2]);
+        String fileName = args[0];
+        int startingVertex =  Integer.parseInt(args[1]);
+        int endingVertex = Integer.parseInt(args[2]);
 
-        String fileName = "C:\\Users\\John Fike\\CSCI232\\CSCI232\\CSCI232LAB9\\src\\graph.txt";
-        int startingVertex =  4;
-        int endingVertex = 1;
+//        String fileName = "C:\\Users\\John Fike\\CSCI232\\CSCI232\\CSCI232LAB9\\src\\graph.txt";
+//        int startingVertex =  4;
+//        int endingVertex = 1;
 
 
         //create new graph from file, search using BFS, grab path from BFS obj
@@ -43,17 +43,3 @@ public class IntegerShortestPath {
         System.out.println(pathStr.toString());
     }
 }
-
-//
-
-/*
-5
-0,2,1
-0,1,2
-1,3,5
-2,3,1
-3,4,10
-2,4,5
-
-EDGE DNE FIND 1 - 4
- */
